@@ -10,6 +10,7 @@ LOCAL_SRC_FILES:= \
     ril_event.cpp
 
 LOCAL_SHARED_LIBRARIES := \
+    liblog \
     libutils \
     libbinder \
     libcutils \
@@ -18,6 +19,10 @@ LOCAL_SHARED_LIBRARIES := \
 LOCAL_CFLAGS :=
 ifdef BOARD_USE_NEW_LIBRIL_HTC
     LOCAL_CFLAGS += -DNEW_LIBRIL_HTC
+endif
+
+ifeq ($(BOARD_RIL_NO_CELLINFOLIST),true)
+LOCAL_CFLAGS += -DRIL_NO_CELL_INFO_LIST
 endif
 
 LOCAL_MODULE:= libril
